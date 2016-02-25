@@ -9,11 +9,17 @@ public class graph {
 	private ArrayList<sommet> l = new ArrayList<sommet>();// les elements
 	private static ArrayList<sommet> ol = new ArrayList<sommet>();//tous les elements
 	private ArrayList<sommet> e_d = new ArrayList<sommet>();
-	private ArrayList<sommet> juger = new ArrayList<sommet>();// les sommets lie avec e_d
+	//private ArrayList<sommet> juger = new ArrayList<sommet>();// les sommets lie avec e_d
 	public static ArrayList<graph> s_e_d = new ArrayList<graph>();
 	private int taille;
-	
+	private static int min;//
+	private static boolean[][] juger ;//
+	private static boolean[] som;//
 	graph(){
+	}
+	
+	public int getmin(){
+		return min;
 	}
 	
 	graph(graph g){
@@ -45,7 +51,7 @@ public class graph {
 	}
 	
 	public void connexion(){
-		boolean[][] tab = new boolean[this.l.size()][this.l.size()];
+		boolean[][] tab = new boolean[this.l.size()][this.l.size()];		
 		for(int i = 0; i < this.l.size(); i ++){
 			for(int j = i + 1; j < this.l.size();j++){
 				Random r = new Random();
@@ -70,8 +76,18 @@ public class graph {
 				int s = this.l.size();
 				tab[i][s - 1] = true;
 			}
+//modifie***************************************************
+			juger = tab;
+			som = new boolean [this.l.size()];
+			min = this.l.size();
+			for(int a = 0; a < this.l.size(); a++){
+				    juger[a][a] = true;
+				for(int b = a+1; b < this.l.size(); b++){
+					juger[b][a] = juger[a][b]; 
+				}
+			}
 		}
-		
+//************************************************************		
 		for(int i = 0; i < this.l.size(); i ++){
 			for( int j = i + 1; j < this.l.size();j++){
 				if(tab[i][j] == true){
@@ -84,7 +100,7 @@ public class graph {
 		}
 	}
 	
-	
+/*	
 	Comparator<sommet> comparator = new Comparator<sommet>(){
 		public int compare(sommet s1, sommet s2){
 			return s1.get_num() - s2.get_num() ;
@@ -111,7 +127,7 @@ public class graph {
 		}
 		return flag;
 	}
-	
+*/	
 	
 	
 	public graph modifier (sommet s){
@@ -119,7 +135,7 @@ public class graph {
 		graph g = new graph(this);		   
 		return g;
 	}
-	
+/*	
 	public void creer_juger(){
 		
 		for(int i = 0; i < this.e_d.size(); i++){
@@ -131,9 +147,9 @@ public class graph {
 			
 		}
 	}
+*/	
 	
-	
-	
+/*	
 	public void jugement(){
 		this.creer_juger();
 		int flag = 0 ;
@@ -152,6 +168,53 @@ public class graph {
 			//}
 		}
 	}
+*/
+	
+	public void creer_juger(){
+		
+	    for(int i = 0; i < this.ol.size(); i++){
+	    	som[i] = false;
+	    }
+		for(int j = 0; j < this.e_d.size(); j++){
+			sommet a = this.e_d.get(j);
+			int k = a.get_num();
+			som[k] = true;
+		}
+	}
+	
+	public void jugement(){
+		 this.creer_juger();
+		int flag = 0;
+		for(int i = 0; i < this.ol.size(); i++){
+			if(som[i] == false){
+				int lia = 0;
+				for(int j = 0; j < this.ol.size(); j++){
+					if(som[j] == true){
+						if(juger[i][j] == true){
+							lia =1;break;
+						}
+					}
+				}
+				if(lia == 0){
+					flag = 1;break;					
+				}
+			}		
+		}
+		if(flag == 0){
+			if(this.e_d.size() < min){
+				min = this.e_d.size();
+				this.s_e_d.clear();
+				this.s_e_d.add(this);
+			}
+			else if(this.e_d.size() == min){
+			this.s_e_d.add(this);
+			}
+			else{
+			}
+		}	
+		
+	}
+	
 	
 	
 	
@@ -160,9 +223,8 @@ public class graph {
 			while(this.l.size()!=0){
 				sommet a = this.l.get(0);				
 				graph g = this.modifier(a);
-				g.e_d.add(a);
+				g.e_d.add(a);				
 				g.jugement();
-				
 				g.fonction1();
 			}
 		//}

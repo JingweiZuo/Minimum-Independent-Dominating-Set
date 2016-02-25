@@ -18,7 +18,7 @@ public class rattrabage {
 		
 		
 		
-		
+	/*	
 		int min = 10 ;
 		for(int i = 0; i < gra.get_s_e_d_taille(); i ++){
 			graph g = gra.get_graph(i);
@@ -27,15 +27,15 @@ public class rattrabage {
 			}	
 		}
 		
+	*/	
 		
-		
-		System.out.println("min ="+ min);
+		System.out.println("min ="+ gra.getmin());
 		
 		for(int i = 0; i < gra.get_s_e_d_taille(); i ++){
 			graph g = gra.get_graph(i);
-			if(g.get_taille() == min){
+			//if(g.get_taille() == min){
 				g.affiche();
-			}	
+			//}	
 		}
 		
 		
