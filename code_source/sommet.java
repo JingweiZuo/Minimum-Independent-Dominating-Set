@@ -1,5 +1,3 @@
-package rattrabage;
-
 import java.util.ArrayList;
 public class sommet {
 	private int num;
@@ -29,7 +27,7 @@ public class sommet {
 	
 	public void affiche(){
 		System.out.println("num = " + this.num );
-		System.out.println("les sommets liaison sont ");
+		System.out.println("les sommets reliés sont ");
 		for(int i = 0; i < this.liaison.size();i++){
 			sommet s = this.liaison.get(i);
 			System.out.println(s.num);

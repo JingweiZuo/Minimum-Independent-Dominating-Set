@@ -1,15 +1,13 @@
-package rattrabage;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
 public class graph {
-	private ArrayList<sommet> l = new ArrayList<sommet>();// les elements
-	private static ArrayList<sommet> ol = new ArrayList<sommet>();//tous les elements
+	private ArrayList<sommet> l = new ArrayList<sommet>();// les elements dans le graphe 
+	private static ArrayList<sommet> ol = new ArrayList<sommet>();//les elements dans le graphe complet
 	private ArrayList<sommet> e_d = new ArrayList<sommet>();
-	//private ArrayList<sommet> juger = new ArrayList<sommet>();// les sommets lie avec e_d
+	//private ArrayList<sommet> juger = new ArrayList<sommet>();// les sommets reliés avec e_d
 	public static ArrayList<graph> s_e_d = new ArrayList<graph>();
 	private int taille;
 	private static int min;//
@@ -36,7 +34,6 @@ public class graph {
 		this.l.remove(s);
 		
 	}
-	
 	
 	public int get_taille(){
 		return this.e_d.size();
@@ -129,7 +126,6 @@ public class graph {
 	}
 */	
 	
-	
 	public graph modifier (sommet s){
 		this.l.remove(s);
 		graph g = new graph(this);		   
@@ -171,10 +167,9 @@ public class graph {
 */
 	
 	public void creer_juger(){
-		
-	    for(int i = 0; i < this.ol.size(); i++){
-	    	som[i] = false;
-	    }
+	    	for(int i = 0; i < this.ol.size(); i++){
+	    		som[i] = false;
+	    	}
 		for(int j = 0; j < this.e_d.size(); j++){
 			sommet a = this.e_d.get(j);
 			int k = a.get_num();
@@ -183,7 +178,7 @@ public class graph {
 	}
 	
 	public void jugement(){
-		 this.creer_juger();
+		this.creer_juger();
 		int flag = 0;
 		for(int i = 0; i < this.ol.size(); i++){
 			if(som[i] == false){
@@ -247,13 +242,11 @@ public class graph {
 	}
 	
 	public void schma(){
-		System.out.println("c'est le connxion de graph");
+		System.out.println("les sommets dans ce graphe sont:");
 		for(int i = 0; i < this.l.size();i++){
 			sommet a = this.l.get(i);
 			a.affiche();
 		}
 	}
 			
-		
-
 }

@@ -1,7 +1,4 @@
-package rattrabage;
-
-
-public class rattrabage {
+public class execution {
 	static final int N = 4;
 	public static void main(String args[]){
 		
