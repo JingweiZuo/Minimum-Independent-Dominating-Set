@@ -17,4 +17,4 @@ Then this algorithm will be based on the above figure, of course, we can choose 
 
 ###Example for graphe of 4 elements
 
-![image](tree_énumération.png)
+![image](images/example3.png)
